@@ -1,10 +1,12 @@
 import { ForbiddenError } from "apollo-server-errors";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import { Context } from "..";
 import { registerValidation } from "../../middlewares/validation";
 import User, { UserAttrs } from "../../models/User";
 
 export const UserMutations = {
-  async registerUser(prt: any, args: { values: UserAttrs }, ctx: Context) {
+  async registerUser(prt: any, args: { values: UserAttrs }, { res }: Context) {
     registerValidation(args.values);
     const userExists = await User.exists({
       $or: [
@@ -19,8 +21,17 @@ export const UserMutations = {
         "User with that name or civil ID already exists"
       );
     }
+    args.values.fullName = args.values.fullName.toLowerCase();
+    args.values.civilID = await bcrypt.hash(args.values.civilID, 10);
     const user = User.build(args.values);
     await user.save();
-    return user;
+    const token = jwt.sign(user, process.env.JWT_SECRET!);
+    res.cookie("token", token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+      ...(process.env.NODE_ENV !== "development" && { sameSite: "none" }),
+      secure: process.env.NODE_ENV !== "development"
+    });
+    return { token };
   }
 };

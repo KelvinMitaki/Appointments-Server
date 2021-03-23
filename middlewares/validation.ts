@@ -10,7 +10,7 @@ export const registerValidation = (values: UserAttrs) => {
   if (!age || (age && !validator.isNumeric(age.toString())) || age < 0) {
     throw new UserInputError("Invalid age");
   }
-  if (!civilID || (civilID && !validator.isNumeric(civilID.toString()))) {
+  if (!civilID || (civilID && !validator.isNumeric(civilID))) {
     throw new UserInputError("Invalid Civil ID");
   }
   if (typeof isDoctor !== "boolean") {

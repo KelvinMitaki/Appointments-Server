@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 export interface UserAttrs {
   fullName: string;
-  civilID: number;
+  civilID: string;
   age: number;
   isDoctor: boolean;
 }
 
 interface UserDoc extends mongoose.Document {
   fullName: string;
-  civilID: number;
+  civilID: string;
   age: number;
   isDoctor: boolean;
 }
