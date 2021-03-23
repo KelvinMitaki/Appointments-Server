@@ -13,7 +13,7 @@ export const UserMutations = {
     registerValidation(args.values);
     const userExists = await User.exists({
       $or: [
-        { fullName: args.values.fullName },
+        { fullName: args.values.fullName.toLowerCase() },
         {
           civilID: args.values.civilID
         }
