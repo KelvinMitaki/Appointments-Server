@@ -14,9 +14,9 @@ const typeDefs = gql`
     books: [Book]!
   }
   type Mutation {
-    register(values: RegisterInput): User!
+    registerUser(values: RegisterUserInput): User!
   }
-  input RegisterInput {
+  input RegisterUserInput {
     fullName: String!
     civilID: Int!
     age: Int!

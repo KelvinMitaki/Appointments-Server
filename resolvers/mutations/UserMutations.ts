@@ -4,7 +4,7 @@ import { registerValidation } from "../../middlewares/validation";
 import User, { UserAttrs } from "../../models/User";
 
 export const UserMutations = {
-  async register(prt: any, args: { values: UserAttrs }, ctx: Context) {
+  async registerUser(prt: any, args: { values: UserAttrs }, ctx: Context) {
     registerValidation(args.values);
     const userExists = await User.exists({
       $or: [
