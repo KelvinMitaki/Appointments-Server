@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Book {
     title: String!
@@ -11,7 +11,7 @@ const typeDefs = gql`
     isDoctor: Boolean!
   }
   type Query {
-    books: [Book]!
+    fetchCurrentUser: User!
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!

@@ -1,7 +1,14 @@
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "apollo-server-express";
 import mongoose from "mongoose";
+import express from "express";
+import cookieParser from "cookie-parser";
 import resolvers from "./resolvers";
 import typeDefs from "./schema/schema";
+
+const app = express();
+
+app.set("trust proxy", "1");
+app.use(cookieParser());
 
 const server = new ApolloServer({
   typeDefs,
@@ -11,6 +18,15 @@ const server = new ApolloServer({
       req,
       res
     };
+  }
+});
+
+server.applyMiddleware({
+  app,
+  path: "/graphql",
+  cors: {
+    credentials: true,
+    origin: "http://localhost:3000"
   }
 });
 
@@ -28,6 +44,7 @@ const mongooseConnect = async () => {
   }
 };
 mongooseConnect();
-server
-  .listen()
-  .then(({ port }) => console.log(`server started on port ${port}`));
+
+app.listen({ port: process.env.PORT || 4000 }, () =>
+  console.log(`server started on ${server.graphqlPath}`)
+);
