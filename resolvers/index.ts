@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserMutations } from "./mutations/userMutations";
+import { UserMutations } from "./mutations/UserMutations";
 import { UserQueries } from "./queries/UserQueries";
 
 export interface Context {

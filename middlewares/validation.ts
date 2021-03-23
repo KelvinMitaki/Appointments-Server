@@ -1,7 +1,7 @@
 import { UserInputError } from "apollo-server-errors";
-import { Request } from "express";
 import validator from "validator";
 import { UserAttrs } from "../models/User";
+
 export const registerValidation = (values: UserAttrs) => {
   const { age, civilID, fullName, isDoctor } = values;
   if (!fullName || fullName.trim().length == 0) {
