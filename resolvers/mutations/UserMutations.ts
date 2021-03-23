@@ -28,13 +28,14 @@ export const UserMutations = {
     args.values.civilID = await bcrypt.hash(args.values.civilID, 10);
     const user = User.build(args.values);
     await user.save();
-    const token = jwt.sign(user, process.env.JWT_SECRET!);
+    const token = jwt.sign(user.toObject(), process.env.JWT_SECRET!);
     res.cookie("token", token, {
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
       ...(process.env.NODE_ENV !== "development" && { sameSite: "none" }),
       secure: process.env.NODE_ENV !== "development"
     });
+
     return { token };
   },
   async loginUser(
@@ -51,7 +52,7 @@ export const UserMutations = {
     if (!isMatch) {
       throw new ForbiddenError("Invalid email or password");
     }
-    const token = jwt.sign(user, process.env.JWT_SECRET!);
+    const token = jwt.sign(user.toObject(), process.env.JWT_SECRET!);
     res.cookie("token", token, {
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),

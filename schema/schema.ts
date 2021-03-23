@@ -6,7 +6,7 @@ const typeDefs = gql`
   }
   type User {
     fullName: String!
-    civilID: Int!
+    civilID: String!
     age: Int!
     isDoctor: Boolean!
   }
@@ -15,14 +15,14 @@ const typeDefs = gql`
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!
-    loginUser(fullName: String!, civilID: Int!): Token!
+    loginUser(fullName: String!, civilID: String!): Token!
   }
   type Token {
     token: String!
   }
   input RegisterUserInput {
     fullName: String!
-    civilID: Int!
+    civilID: String!
     age: Int!
     isDoctor: Boolean!
   }
