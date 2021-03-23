@@ -17,3 +17,16 @@ export const registerValidation = (values: UserAttrs) => {
     throw new UserInputError("Invalid Doctor choice");
   }
 };
+export const loginValidation = (values: {
+  fullName: string;
+  civilID: string;
+}) => {
+  const { civilID, fullName } = values;
+  if (!fullName || fullName.trim().length == 0) {
+    throw new UserInputError("Invalid full name");
+  }
+
+  if (!civilID || (civilID && !validator.isNumeric(civilID))) {
+    throw new UserInputError("Invalid Civil ID");
+  }
+};
