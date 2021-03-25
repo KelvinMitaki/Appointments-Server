@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { PostMutations } from "./mutations/PostMutations";
 import { UserMutations } from "./mutations/UserMutations";
 import { UserQueries } from "./queries/UserQueries";
 
@@ -12,7 +13,8 @@ const resolvers = {
     ...UserQueries
   },
   Mutation: {
-    ...UserMutations
+    ...UserMutations,
+    ...PostMutations
   }
 };
 

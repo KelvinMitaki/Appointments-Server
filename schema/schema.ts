@@ -9,9 +9,12 @@ const typeDefs = gql`
     civilID: String!
     age: Int!
     isDoctor: Boolean!
+    _id: String!
+    createdAt: String!
+    updatedAt: String!
   }
   type Query {
-    fetchCurrentUser: User!
+    fetchCurrentUser: User
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!

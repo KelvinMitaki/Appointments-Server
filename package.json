@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
-    "server": "env-cmd -f ./config/keys.env nodemon -e ts,env index.ts"
+    "dev": "env-cmd -f ./config/keys.env nodemon -e ts,env index.ts"
   },
   "keywords": [],
   "author": "",

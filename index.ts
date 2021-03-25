@@ -26,7 +26,7 @@ server.applyMiddleware({
   path: "/graphql",
   cors: {
     credentials: true,
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3001"
   }
 });
 
