@@ -1,8 +1,16 @@
 import { gql } from "apollo-server-express";
 const typeDefs = gql`
-  type Book {
-    title: String!
-    author: String!
+  type Query {
+    fetchCurrentUser: User
+  }
+  type Mutation {
+    registerUser(values: RegisterUserInput): Token!
+    loginUser(fullName: String!, civilID: String!): Token!
+    createPost(message: String!): Post!
+    createComment(message: String!): Comment!
+  }
+  type Token {
+    token: String!
   }
   type User {
     fullName: String!
@@ -13,15 +21,20 @@ const typeDefs = gql`
     createdAt: String!
     updatedAt: String!
   }
-  type Query {
-    fetchCurrentUser: User
+  type Post {
+    author: User!
+    message: String!
+    likes: [String!]!
+    createdAt: String!
+    updatedAt: String!
   }
-  type Mutation {
-    registerUser(values: RegisterUserInput): Token!
-    loginUser(fullName: String!, civilID: String!): Token!
-  }
-  type Token {
-    token: String!
+  type Comment {
+    author: User!
+    post: String!
+    message: String!
+    likes: [String!]!
+    createdAt: String!
+    updatedAt: String!
   }
   input RegisterUserInput {
     fullName: String!
