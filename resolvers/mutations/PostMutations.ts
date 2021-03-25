@@ -5,6 +5,7 @@ import Post from "../../models/Post";
 
 export const PostMutations = {
   async createPost(prt: any, args: { message: string }, { req, res }: Context) {
+    console.log(req.headers);
     const patient = patientAuth(req);
     const post = Post.build({ author: patient._id, message: args.message });
     await post.save();
@@ -18,6 +19,6 @@ export const PostMutations = {
     const patient = patientAuth(req);
     const comment = Comment.build({ author: patient._id, ...args });
     await comment.save();
-    return comment;
+    return { ...comment.toObject(), author: patient };
   }
 };

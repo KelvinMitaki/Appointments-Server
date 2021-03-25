@@ -2,7 +2,7 @@ import { AuthenticationError, ForbiddenError } from "apollo-server-errors";
 import { Request } from "express";
 import jwt from "jsonwebtoken";
 import { UserDoc } from "../models/User";
-export const patientAuth = (req: Request) => {
+export const patientAuth = (req: Request, allowDoctor?: boolean) => {
   if (!req.cookies || Object.keys(req.cookies).length === 0) {
     throw new AuthenticationError("Not authenticated");
   }
@@ -17,7 +17,7 @@ export const patientAuth = (req: Request) => {
 
   try {
     const user = jwt.verify(split_token, process.env.JWT_SECRET!) as UserDoc;
-    if (user.isDoctor) {
+    if (user.isDoctor && !allowDoctor) {
       throw new ForbiddenError("Not authorized");
     }
     return user;

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { PostMutations } from "./mutations/PostMutations";
 import { UserMutations } from "./mutations/UserMutations";
+import { PostQueries } from "./queries/PostQueries";
 import { UserQueries } from "./queries/UserQueries";
 
 export interface Context {
@@ -10,7 +11,8 @@ export interface Context {
 
 const resolvers = {
   Query: {
-    ...UserQueries
+    ...UserQueries,
+    ...PostQueries
   },
   Mutation: {
     ...UserMutations,

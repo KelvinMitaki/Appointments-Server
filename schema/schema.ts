@@ -2,6 +2,8 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     fetchCurrentUser: User
+    fetchPosts: [Post!]!
+    fetchComments(postID: String!): [Comment!]!
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!
@@ -22,6 +24,7 @@ const typeDefs = gql`
     updatedAt: String!
   }
   type Post {
+    _id: String!
     author: User!
     message: String!
     likes: [String!]!
@@ -29,6 +32,7 @@ const typeDefs = gql`
     updatedAt: String!
   }
   type Comment {
+    _id: String!
     author: User!
     post: String!
     message: String!
