@@ -30,6 +30,7 @@ const typeDefs = gql`
     likes: [String!]!
     createdAt: String!
     updatedAt: String!
+    comments: Int!
   }
   type Comment {
     _id: String!

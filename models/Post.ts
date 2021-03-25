@@ -4,12 +4,14 @@ export interface PostAttrs {
   author: string;
   message: string;
   likes?: string[];
+  comments: number;
 }
 
 export interface PostDoc extends mongoose.Document {
   author: string;
   message: string;
   likes?: string[];
+  comments: number;
 }
 
 interface PostModel extends mongoose.Model<PostDoc> {
@@ -33,7 +35,11 @@ const PostSchema = new mongoose.Schema(
         required: true,
         ref: "User"
       }
-    ]
+    ],
+    comments: {
+      type: Number,
+      required: true
+    }
   },
   {
     timestamps: true

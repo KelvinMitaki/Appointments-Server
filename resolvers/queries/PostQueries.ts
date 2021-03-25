@@ -9,13 +9,15 @@ export const PostQueries = {
     const postNum = await Post.countDocuments();
     return Post.find()
       .limit(50)
-      .skip(postNum > 50 ? postNum - 50 : 0);
+      .skip(postNum > 50 ? postNum - 50 : 0)
+      .populate("author");
   },
   async fetchComments(prt: any, args: { postID: string }, { req }: Context) {
     patientAuth(req, true);
     const commentNum = await Comment.countDocuments({ post: args.postID });
     return Comment.find()
       .limit(50)
-      .skip(commentNum > 50 ? commentNum - 50 : 0);
+      .skip(commentNum > 50 ? commentNum - 50 : 0)
+      .populate("author");
   }
 };
