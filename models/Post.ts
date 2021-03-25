@@ -19,7 +19,8 @@ interface PostModel extends mongoose.Model<PostDoc> {
 const PostSchema = new mongoose.Schema(
   {
     author: {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: "User",
       required: true
     },
     message: {
@@ -28,8 +29,9 @@ const PostSchema = new mongoose.Schema(
     },
     likes: [
       {
-        type: String,
-        required: true
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: "User"
       }
     ]
   },
