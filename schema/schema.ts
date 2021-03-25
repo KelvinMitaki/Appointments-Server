@@ -7,7 +7,7 @@ const typeDefs = gql`
     registerUser(values: RegisterUserInput): Token!
     loginUser(fullName: String!, civilID: String!): Token!
     createPost(message: String!): Post!
-    createComment(message: String!): Comment!
+    createComment(message: String!, post: String!): Comment!
   }
   type Token {
     token: String!

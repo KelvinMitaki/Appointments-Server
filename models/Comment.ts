@@ -7,7 +7,7 @@ export interface CommentAttrs {
   likes?: string[];
 }
 
-interface CommentDoc extends mongoose.Document {
+export interface CommentDoc extends mongoose.Document {
   author: string;
   message: string;
   post: string;

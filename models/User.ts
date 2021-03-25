@@ -7,7 +7,7 @@ export interface UserAttrs {
   isDoctor: boolean;
 }
 
-interface UserDoc extends mongoose.Document {
+export interface UserDoc extends mongoose.Document {
   fullName: string;
   civilID: string;
   age: number;

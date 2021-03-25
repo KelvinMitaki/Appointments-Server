@@ -6,7 +6,7 @@ export interface PostAttrs {
   likes?: string[];
 }
 
-interface PostDoc extends mongoose.Document {
+export interface PostDoc extends mongoose.Document {
   author: string;
   message: string;
   likes?: string[];
