@@ -10,7 +10,8 @@ export const PostQueries = {
     return Post.find()
       .limit(50)
       .skip(postNum > 50 ? postNum - 50 : 0)
-      .populate("author");
+      .populate("author")
+      .sort({ _id: -1 });
   },
   async fetchComments(prt: any, args: { postID: string }, { req }: Context) {
     patientAuth(req, true);
@@ -18,6 +19,7 @@ export const PostQueries = {
     return Comment.find()
       .limit(50)
       .skip(commentNum > 50 ? commentNum - 50 : 0)
-      .populate("author");
+      .populate("author")
+      .sort({ _id: -1 });
   }
 };

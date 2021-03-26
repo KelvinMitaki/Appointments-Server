@@ -28,5 +28,17 @@ export const PostMutations = {
       await post.save();
     }
     return { ...comment.toObject(), author: patient };
+  },
+  likePost(prt: any, args: { postID: string }, { req }: Context) {
+    const patient = patientAuth(req);
+    return Post.findByIdAndUpdate(args.postID, {
+      $push: { likes: patient._id }
+    });
+  },
+  likeComment(prt: any, args: { commentID: string }, { req }: Context) {
+    const patient = patientAuth(req);
+    return Comment.findByIdAndUpdate(args.commentID, {
+      $push: { likes: patient._id }
+    });
   }
 };

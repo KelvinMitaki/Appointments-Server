@@ -10,6 +10,8 @@ const typeDefs = gql`
     loginUser(fullName: String!, civilID: String!): Token!
     createPost(message: String!): Post!
     createComment(message: String!, post: String!): Comment!
+    likePost(postID: String!): Post!
+    likeComment(commentID: String!): Comment!
   }
   type Token {
     token: String!
