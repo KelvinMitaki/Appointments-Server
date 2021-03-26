@@ -1,3 +1,4 @@
+import { ForbiddenError } from "apollo-server-errors";
 import { Context } from "..";
 import { patientAuth } from "../../middlewares/auth";
 import Comment from "../../models/Comment";
@@ -29,16 +30,42 @@ export const PostMutations = {
     }
     return { ...comment.toObject(), author: patient };
   },
-  likePost(prt: any, args: { postID: string }, { req }: Context) {
+  async likePost(prt: any, args: { postID: string }, { req }: Context) {
     const patient = patientAuth(req);
-    return Post.findByIdAndUpdate(args.postID, {
-      $push: { likes: patient._id }
-    });
+    const post = await Post.findById(args.postID).populate("author");
+    if (post) {
+      const userLiked = post.likes?.find(
+        p => p.toString() === patient._id.toString()
+      );
+      if (userLiked) {
+        post.likes = post.likes?.filter(
+          id => id.toString() !== patient._id.toString()
+        );
+      } else {
+        post.likes = [...post.likes!, patient._id];
+      }
+      await post.save();
+      return post;
+    }
+    throw new ForbiddenError("No post with that id");
   },
-  likeComment(prt: any, args: { commentID: string }, { req }: Context) {
+  async likeComment(prt: any, args: { commentID: string }, { req }: Context) {
     const patient = patientAuth(req);
-    return Comment.findByIdAndUpdate(args.commentID, {
-      $push: { likes: patient._id }
-    });
+    const comment = await Comment.findById(args.commentID).populate("author");
+    if (comment) {
+      const userLiked = comment.likes?.find(
+        p => p.toString() === patient._id.toString()
+      );
+      if (userLiked) {
+        comment.likes = comment.likes?.filter(
+          id => id.toString() !== patient._id.toString()
+        );
+      } else {
+        comment.likes = [...comment.likes!, patient._id];
+      }
+      await comment.save();
+      return comment;
+    }
+    throw new ForbiddenError("No comment with that id");
   }
 };
