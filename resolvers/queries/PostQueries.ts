@@ -16,7 +16,7 @@ export const PostQueries = {
   async fetchComments(prt: any, args: { postID: string }, { req }: Context) {
     patientAuth(req, true);
     const commentNum = await Comment.countDocuments({ post: args.postID });
-    return Comment.find()
+    return Comment.find({ post: args.postID })
       .limit(50)
       .skip(commentNum > 50 ? commentNum - 50 : 0)
       .populate("author")
