@@ -4,12 +4,14 @@ export interface MessageAttrs {
   sender: string;
   receiver: string;
   message: string;
+  read: string[];
 }
 
 export interface MessageDoc extends mongoose.Document {
   sender: string;
   receiver: string;
   message: string;
+  read: string[];
 }
 
 interface MessageModel extends mongoose.Model<MessageDoc> {
@@ -31,7 +33,14 @@ const MessageSchema = new mongoose.Schema(
     message: {
       type: String,
       required: true
-    }
+    },
+    read: [
+      {
+        type: String,
+        required: true,
+        ref: "User"
+      }
+    ]
   },
   {
     timestamps: true
