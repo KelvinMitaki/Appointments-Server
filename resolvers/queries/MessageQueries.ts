@@ -6,8 +6,10 @@ export const MessageQueries = {
   fetchMessages(prt: any, args: { receiverID: string }, { req }: Context) {
     const patient = patientAuth(req);
     return Message.find({
-      sender: patient._id,
-      receiver: args.receiverID
+      $or: [
+        { sender: patient._id, receiver: args.receiverID },
+        { receiver: patient._id, sender: args.receiverID }
+      ]
     }).limit(50);
   }
 };
