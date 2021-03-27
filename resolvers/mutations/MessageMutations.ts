@@ -26,16 +26,20 @@ export const MessageMutations = {
     });
     return message;
   },
-  readMessage(
+  async readMessage(
     prt: any,
-    args: { sender: string; receiver: string; messageID: string },
+    args: { reader: string; messageID: string },
     { req }: Context
   ) {
     patientAuth(req);
-    return Message.findByIdAndUpdate(
-      args.messageID,
-      { read: [args.sender, args.receiver] },
-      { new: true }
-    );
+    const message = await Message.findById(args.messageID);
+    if (message) {
+      const read = message.read.find(r => r.toString() === args.reader);
+      if (!read) {
+        message.read = [...message.read, args.reader];
+      }
+      await message.save();
+    }
+    return message;
   }
 };
