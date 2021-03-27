@@ -26,7 +26,7 @@ export const UserQueries = {
     }
   },
   fetchUsers(prt: any, args: any, { req }: Context) {
-    patientAuth(req, true);
-    return User.find({ isDoctor: false }).limit(50);
+    const patient = patientAuth(req, true);
+    return User.find({ _id: { $ne: patient._id }, isDoctor: false }).limit(50);
   }
 };

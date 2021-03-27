@@ -33,9 +33,9 @@ server.applyMiddleware({
   cors: {
     credentials: true,
     origin:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3001"
-        : "https://appointments-seven.vercel.app"
+      process.env.NODE_ENV === "production"
+        ? "https://appointments-seven.vercel.app"
+        : "http://localhost:3001"
   }
 });
 
