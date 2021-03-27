@@ -1,6 +1,7 @@
 import { Context } from "..";
 import jwt from "jsonwebtoken";
 import User from "../../models/User";
+import { patientAuth } from "../../middlewares/auth";
 
 export const UserQueries = {
   async fetchCurrentUser(prt: any, args: any, { req, res }: Context) {
@@ -24,7 +25,8 @@ export const UserQueries = {
       return null;
     }
   },
-  fetchUsers() {
-    return User.find({ isDoctor: false });
+  fetchUsers(prt: any, args: any, { req }: Context) {
+    patientAuth(req, true);
+    return User.find({ isDoctor: false }).limit(50);
   }
 };

@@ -5,6 +5,7 @@ const typeDefs = gql`
     fetchPosts: [Post!]!
     fetchComments(postID: String!): [Comment!]!
     fetchUsers: [User!]!
+    fetchMessages(receiverID: String!): [Message!]!
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!
