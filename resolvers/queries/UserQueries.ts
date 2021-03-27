@@ -1,5 +1,6 @@
 import { Context } from "..";
 import jwt from "jsonwebtoken";
+import User from "../../models/User";
 
 export const UserQueries = {
   async fetchCurrentUser(prt: any, args: any, { req, res }: Context) {
@@ -22,5 +23,8 @@ export const UserQueries = {
       console.log({ error });
       return null;
     }
+  },
+  fetchUsers() {
+    return User.find({ isDoctor: false });
   }
 };

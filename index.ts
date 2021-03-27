@@ -1,6 +1,7 @@
 import { ApolloServer } from "apollo-server-express";
 import mongoose from "mongoose";
 import express from "express";
+import http from "http";
 import cookieParser from "cookie-parser";
 import resolvers from "./resolvers";
 import typeDefs from "./schema/schema";
@@ -18,8 +19,13 @@ const server = new ApolloServer({
       req,
       res
     };
+  },
+  subscriptions: {
+    onConnect: () => console.log("connected to websocket")
   }
 });
+
+const httpServer = http.createServer(app);
 
 server.applyMiddleware({
   app,
@@ -29,6 +35,8 @@ server.applyMiddleware({
     origin: "http://localhost:3001"
   }
 });
+
+server.installSubscriptionHandlers(httpServer);
 
 const mongooseConnect = async () => {
   try {
@@ -45,6 +53,6 @@ const mongooseConnect = async () => {
 };
 mongooseConnect();
 
-app.listen({ port: process.env.PORT || 4000 }, () =>
+httpServer.listen({ port: process.env.PORT || 4000 }, () =>
   console.log(`server started on ${server.graphqlPath}`)
 );
