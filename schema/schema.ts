@@ -12,6 +12,7 @@ const typeDefs = gql`
     createComment(message: String!, post: String!): Comment!
     likePost(postID: String!): Post!
     likeComment(commentID: String!): Comment!
+    addMessage(receiver: String!, message: String!): Message!
   }
 
   type Subscription {

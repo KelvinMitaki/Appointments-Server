@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { MessageMutations } from "./mutations/MessageMutations";
 import { PostMutations } from "./mutations/PostMutations";
 import { UserMutations } from "./mutations/UserMutations";
 import { PostQueries } from "./queries/PostQueries";
@@ -17,7 +18,8 @@ const resolvers = {
   },
   Mutation: {
     ...UserMutations,
-    ...PostMutations
+    ...PostMutations,
+    ...MessageMutations
   },
   Subscription: {
     ...UserSubscriptions
