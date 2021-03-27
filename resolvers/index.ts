@@ -3,6 +3,7 @@ import { PostMutations } from "./mutations/PostMutations";
 import { UserMutations } from "./mutations/UserMutations";
 import { PostQueries } from "./queries/PostQueries";
 import { UserQueries } from "./queries/UserQueries";
+import { UserSubscriptions } from "./subscriptions/UserSubscriptions";
 
 export interface Context {
   req: Request;
@@ -17,6 +18,9 @@ const resolvers = {
   Mutation: {
     ...UserMutations,
     ...PostMutations
+  },
+  Subscription: {
+    ...UserSubscriptions
   }
 };
 

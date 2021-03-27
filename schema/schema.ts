@@ -13,6 +13,10 @@ const typeDefs = gql`
     likePost(postID: String!): Post!
     likeComment(commentID: String!): Comment!
   }
+
+  type Subscription {
+    addMessage: Message!
+  }
   type Token {
     token: String!
   }
@@ -40,6 +44,14 @@ const typeDefs = gql`
     post: String!
     message: String!
     likes: [String!]!
+    createdAt: String!
+    updatedAt: String!
+  }
+  type Message {
+    _id: String!
+    sender: String!
+    receiver: String!
+    message: String!
     createdAt: String!
     updatedAt: String!
   }
