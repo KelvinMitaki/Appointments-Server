@@ -32,7 +32,10 @@ server.applyMiddleware({
   path: "/graphql",
   cors: {
     credentials: true,
-    origin: "http://localhost:3001"
+    origin:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3001"
+        : "https://appointments-seven.vercel.app"
   }
 });
 
