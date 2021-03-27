@@ -17,7 +17,7 @@ const typeDefs = gql`
   }
 
   type Subscription {
-    addMessage: Message!
+    addMessage(receiverID: String!): Message!
   }
   type Token {
     token: String!
@@ -50,12 +50,12 @@ const typeDefs = gql`
     updatedAt: String!
   }
   type Message {
-    _id: String
-    sender: String
-    receiver: String
-    message: String
-    createdAt: String
-    updatedAt: String
+    _id: String!
+    sender: String!
+    receiver: String!
+    message: String!
+    createdAt: String!
+    updatedAt: String!
   }
   input RegisterUserInput {
     fullName: String!

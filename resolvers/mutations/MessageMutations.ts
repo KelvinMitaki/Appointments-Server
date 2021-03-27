@@ -17,7 +17,7 @@ export const MessageMutations = {
     await message.save();
     pubsub.publish("ADD_MESSAGE", {
       addMessage: {
-        ...message
+        ...message.toObject()
       }
     });
     return message;
