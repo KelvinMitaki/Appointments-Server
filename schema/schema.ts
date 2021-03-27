@@ -50,12 +50,12 @@ const typeDefs = gql`
     updatedAt: String!
   }
   type Message {
-    _id: String!
-    sender: String!
-    receiver: String!
-    message: String!
-    createdAt: String!
-    updatedAt: String!
+    _id: String
+    sender: String
+    receiver: String
+    message: String
+    createdAt: String
+    updatedAt: String
   }
   input RegisterUserInput {
     fullName: String!
