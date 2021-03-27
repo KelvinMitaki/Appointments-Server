@@ -18,7 +18,7 @@ const typeDefs = gql`
   }
 
   type Subscription {
-    addMessage(receiverID: String!): Message!
+    addMessage(receiverID: String!, senderID: String!): Message!
   }
   type Token {
     token: String!
