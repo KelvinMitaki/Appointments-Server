@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppointMentMutation } from "./mutations/AppointMentMutation";
 import { MessageMutations } from "./mutations/MessageMutations";
 import { PostMutations } from "./mutations/PostMutations";
 import { UserMutations } from "./mutations/UserMutations";
@@ -21,7 +22,8 @@ const resolvers = {
   Mutation: {
     ...UserMutations,
     ...PostMutations,
-    ...MessageMutations
+    ...MessageMutations,
+    ...AppointMentMutation
   },
   Subscription: {
     ...UserSubscriptions
