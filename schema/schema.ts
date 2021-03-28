@@ -7,6 +7,7 @@ const typeDefs = gql`
     fetchUsers: [User!]!
     fetchMessages(receiverID: String!): [Message!]!
     fetchAppointMents: [AppointMent!]!
+    fetchHealthMessages: [HealthMessage!]!
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!
@@ -19,6 +20,7 @@ const typeDefs = gql`
     readMessage(reader: String!, messageID: String!): Message!
     addAppointMent(patient: String!, date: String!): AppointMent!
     addHealthMessage(title: String!, body: String!): HealthMessage!
+    deleteHealthMessage(_id: String!): HealthMessage!
   }
 
   type Subscription {

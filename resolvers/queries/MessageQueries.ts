@@ -1,5 +1,6 @@
 import { Context } from "..";
-import { patientAuth } from "../../middlewares/auth";
+import { doctorAuth, patientAuth } from "../../middlewares/auth";
+import HealthMessage from "../../models/HealthMessage";
 import Message from "../../models/Message";
 
 export const MessageQueries = {
@@ -11,5 +12,9 @@ export const MessageQueries = {
         { receiver: patient._id, sender: args.receiverID }
       ]
     }).limit(50);
+  },
+  fetchHealthMessages(prt: any, args: any, { req }: Context) {
+    patientAuth(req, true);
+    return HealthMessage.find({ deleted: false }).limit(50);
   }
 };

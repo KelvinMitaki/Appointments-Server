@@ -52,5 +52,13 @@ export const MessageMutations = {
     const healthMessage = HealthMessage.build({ ...args, doctor: doctor._id });
     await healthMessage.save();
     return healthMessage;
+  },
+  deleteHealthMessage(prt: any, args: { _id: string }, { req }: Context) {
+    const doc = doctorAuth(req);
+    return HealthMessage.findByIdAndUpdate(
+      args._id,
+      { deleted: true, deletee: doc._id },
+      { new: true }
+    );
   }
 };

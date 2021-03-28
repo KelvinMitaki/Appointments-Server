@@ -4,12 +4,16 @@ export interface HealthMessageAttrs {
   title: string;
   body: string;
   doctor: string;
+  deleted?: boolean;
+  deletee?: string;
 }
 
 export interface HealthMessageDoc extends mongoose.Document {
   title: string;
   body: string;
   doctor: string;
+  deleted?: boolean;
+  deletee?: string;
 }
 
 interface HealthMessageModel extends mongoose.Model<HealthMessageDoc> {
@@ -30,6 +34,14 @@ const HealthMessageSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: true
+    },
+    deletee: {
+      type: mongoose.Types.ObjectId,
+      ref: "User"
+    },
+    deleted: {
+      type: Boolean,
+      default: false
     }
   },
   {
