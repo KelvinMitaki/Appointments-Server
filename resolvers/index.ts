@@ -3,6 +3,7 @@ import { AppointMentMutation } from "./mutations/AppointMentMutation";
 import { MessageMutations } from "./mutations/MessageMutations";
 import { PostMutations } from "./mutations/PostMutations";
 import { UserMutations } from "./mutations/UserMutations";
+import { AppointmentQueries } from "./queries/AppointmentQueries";
 import { MessageQueries } from "./queries/MessageQueries";
 import { PostQueries } from "./queries/PostQueries";
 import { UserQueries } from "./queries/UserQueries";
@@ -17,7 +18,8 @@ const resolvers = {
   Query: {
     ...UserQueries,
     ...PostQueries,
-    ...MessageQueries
+    ...MessageQueries,
+    ...AppointmentQueries
   },
   Mutation: {
     ...UserMutations,

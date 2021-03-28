@@ -3,13 +3,13 @@ import mongoose from "mongoose";
 export interface AppointMentAttrs {
   patient: string;
   doctor: string;
-  date: string;
+  date: number;
 }
 
 export interface AppointMentDoc extends mongoose.Document {
   patient: string;
   doctor: string;
-  date: string;
+  date: number;
 }
 
 interface AppointMentModel extends mongoose.Model<AppointMentDoc> {
@@ -29,7 +29,7 @@ const AppointMentSchema = new mongoose.Schema(
       required: true
     },
     date: {
-      type: String,
+      type: Number,
       required: true
     }
   },

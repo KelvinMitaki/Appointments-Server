@@ -6,6 +6,7 @@ const typeDefs = gql`
     fetchComments(postID: String!): [Comment!]!
     fetchUsers: [User!]!
     fetchMessages(receiverID: String!): [Message!]!
+    fetchAppointMents: [AppointMent!]!
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!
@@ -16,7 +17,7 @@ const typeDefs = gql`
     likeComment(commentID: String!): Comment!
     addMessage(receiver: String!, message: String!): Message!
     readMessage(reader: String!, messageID: String!): Message!
-    addAppointMent(patient: String!, date: String!): AppointMent!
+    addAppointMent(patient: String!, date: Int!): AppointMent!
   }
 
   type Subscription {
@@ -65,7 +66,7 @@ const typeDefs = gql`
     _id: String!
     patient: User!
     doctor: String!
-    date: String!
+    date: Int!
     createdAt: String!
     updatedAt: String!
   }

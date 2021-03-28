@@ -5,7 +5,7 @@ import AppointMent from "../../models/Appointment";
 export const AppointMentMutation = {
   async addAppointMent(
     prt: any,
-    args: { patient: string; date: string },
+    args: { patient: string; date: number },
     { req }: Context
   ) {
     const doctor = doctorAuth(req);
