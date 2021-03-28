@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppointMentDoc } from "../models/Appointment";
 import { AppointMentMutation } from "./mutations/AppointMentMutation";
 import { MessageMutations } from "./mutations/MessageMutations";
 import { PostMutations } from "./mutations/PostMutations";
@@ -29,6 +30,11 @@ const resolvers = {
   },
   Subscription: {
     ...UserSubscriptions
+  },
+  AppointMent: {
+    date(prt: AppointMentDoc) {
+      return prt.date.toString();
+    }
   }
 };
 
