@@ -18,6 +18,7 @@ const typeDefs = gql`
     addMessage(receiver: String!, message: String!): Message!
     readMessage(reader: String!, messageID: String!): Message!
     addAppointMent(patient: String!, date: String!): AppointMent!
+    addHealthMessage(title: String!, body: String!): HealthMessage!
   }
 
   type Subscription {
@@ -67,6 +68,14 @@ const typeDefs = gql`
     patient: User!
     doctor: String!
     date: String!
+    createdAt: String!
+    updatedAt: String!
+  }
+  type HealthMessage {
+    _id: String!
+    title: String!
+    body: String!
+    doctor: String!
     createdAt: String!
     updatedAt: String!
   }

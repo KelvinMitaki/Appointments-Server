@@ -1,5 +1,6 @@
 import { Context } from "..";
-import { patientAuth } from "../../middlewares/auth";
+import { doctorAuth, patientAuth } from "../../middlewares/auth";
+import HealthMessage from "../../models/HealthMessage";
 import Message from "../../models/Message";
 import { pubsub } from "../subscriptions/UserSubscriptions";
 
@@ -41,5 +42,15 @@ export const MessageMutations = {
       await message.save();
     }
     return message;
+  },
+  async addHealthMessage(
+    prt: any,
+    args: { title: string; body: string },
+    { req }: Context
+  ) {
+    const doctor = doctorAuth(req);
+    const healthMessage = HealthMessage.build({ ...args, doctor: doctor._id });
+    await healthMessage.save();
+    return healthMessage;
   }
 };
