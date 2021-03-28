@@ -1,8 +1,17 @@
+import { ForbiddenError } from "apollo-server-errors";
+import AWS from "aws-sdk";
+import { v1 as uuidV1 } from "uuid";
 import { Context } from "..";
 import { patientAuth } from "../../middlewares/auth";
 import Comment from "../../models/Comment";
 import Post from "../../models/Post";
 
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET,
+  signatureVersion: "v4",
+  region: "eu-west-2"
+});
 export const PostQueries = {
   async fetchPosts(prt: any, args: any, { req }: Context) {
     patientAuth(req, true);
@@ -21,5 +30,21 @@ export const PostQueries = {
       .skip(commentNum > 50 ? commentNum - 50 : 0)
       .populate("author")
       .sort({ _id: -1 });
+  },
+  async getSignedUrl(prt: any, args: any, { req }: Context) {
+    const patient = patientAuth(req);
+    const key = `${patient._id}/${uuidV1()}.jpeg`;
+    s3.getSignedUrl(
+      "putObject",
+      {
+        Bucket: "e-commerce-gig",
+        ContentType: "image/jpeg",
+        Key: key
+      },
+      (err, url) => {
+        if (err) throw new ForbiddenError("error getting signed url" + err);
+        return { key, url };
+      }
+    );
   }
 };

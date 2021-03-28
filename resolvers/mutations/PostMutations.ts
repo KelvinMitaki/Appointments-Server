@@ -1,8 +1,17 @@
 import { ForbiddenError } from "apollo-server-errors";
+import AWS from "aws-sdk";
+import { v1 as uuidV1 } from "uuid";
 import { Context } from "..";
 import { patientAuth } from "../../middlewares/auth";
 import Comment from "../../models/Comment";
 import Post from "../../models/Post";
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET,
+  signatureVersion: "v4",
+  region: "eu-west-2"
+});
 
 export const PostMutations = {
   async createPost(prt: any, args: { message: string }, { req, res }: Context) {

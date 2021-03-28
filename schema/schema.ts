@@ -8,6 +8,7 @@ const typeDefs = gql`
     fetchMessages(receiverID: String!): [Message!]!
     fetchAppointMents: [AppointMent!]!
     fetchHealthMessages: [HealthMessage!]!
+    getSignedUrl: SignedUrl!
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!
@@ -80,6 +81,10 @@ const typeDefs = gql`
     doctor: String!
     createdAt: String!
     updatedAt: String!
+  }
+  type SignedUrl {
+    key: String!
+    url: String!
   }
   input RegisterUserInput {
     fullName: String!
