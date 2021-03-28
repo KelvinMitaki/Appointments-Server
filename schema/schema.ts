@@ -16,6 +16,11 @@ const typeDefs = gql`
     likeComment(commentID: String!): Comment!
     addMessage(receiver: String!, message: String!): Message!
     readMessage(reader: String!, messageID: String!): Message!
+    addAppointMent(
+      patient: String!
+      doctor: String!
+      date: String!
+    ): AppointMent!
   }
 
   type Subscription {
@@ -59,6 +64,14 @@ const typeDefs = gql`
     createdAt: String!
     updatedAt: String!
     read: [String!]!
+  }
+  type AppointMent {
+    _id: String!
+    patient: User!
+    doctor: String!
+    date: String!
+    createdAt: String!
+    updatedAt: String!
   }
   input RegisterUserInput {
     fullName: String!
