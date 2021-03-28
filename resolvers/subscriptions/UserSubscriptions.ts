@@ -7,12 +7,7 @@ export const UserSubscriptions = {
     subscribe: withFilter(
       () => pubsub.asyncIterator(["ADD_MESSAGE"]),
       (payload, variables) => {
-        return (
-          payload.addMessage.receiver.toString() === variables.receiverID ||
-          payload.addMessage.sender.toString() === variables.receiverID ||
-          payload.addMessage.receiver.toString() === variables.senderID ||
-          payload.addMessage.sender.toString() === variables.senderID
-        );
+        return true;
       }
     )
   }
