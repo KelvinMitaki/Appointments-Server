@@ -34,7 +34,7 @@ export const PostQueries = {
   async getSignedUrl(prt: any, args: any, { req }: Context) {
     const patient = patientAuth(req);
     const key = `${patient._id}/${uuidV1()}.jpeg`;
-    s3.getSignedUrl(
+    return s3.getSignedUrl(
       "putObject",
       {
         Bucket: "e-commerce-gig",
@@ -42,7 +42,10 @@ export const PostQueries = {
         Key: key
       },
       (err, url) => {
-        if (err) throw new ForbiddenError("error getting signed url" + err);
+        if (err) {
+          console.log(err);
+          throw new ForbiddenError("error getting signed url" + err);
+        }
         return { key, url };
       }
     );
