@@ -5,6 +5,7 @@ export interface PostAttrs {
   message: string;
   likes?: string[];
   comments: number;
+  imageUrl?: string;
 }
 
 export interface PostDoc extends mongoose.Document {
@@ -12,6 +13,7 @@ export interface PostDoc extends mongoose.Document {
   message: string;
   likes?: string[];
   comments: number;
+  imageUrl?: string;
 }
 
 interface PostModel extends mongoose.Model<PostDoc> {
@@ -38,6 +40,10 @@ const PostSchema = new mongoose.Schema(
     ],
     comments: {
       type: Number,
+      required: true
+    },
+    imageUrl: {
+      type: String,
       required: true
     }
   },

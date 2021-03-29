@@ -6,20 +6,18 @@ import { patientAuth } from "../../middlewares/auth";
 import Comment from "../../models/Comment";
 import Post from "../../models/Post";
 
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET,
-  signatureVersion: "v4",
-  region: "eu-west-2"
-});
-
 export const PostMutations = {
-  async createPost(prt: any, args: { message: string }, { req, res }: Context) {
+  async createPost(
+    prt: any,
+    args: { message: string; imageUrl?: string },
+    { req, res }: Context
+  ) {
     const patient = patientAuth(req);
     const post = Post.build({
       author: patient._id,
       message: args.message,
-      comments: 0
+      comments: 0,
+      ...(args.imageUrl && { imageUrl: args.imageUrl })
     });
     await post.save();
     return { ...post.toObject(), author: patient };
