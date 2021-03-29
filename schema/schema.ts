@@ -22,6 +22,7 @@ const typeDefs = gql`
     addAppointMent(patient: String!, date: String!): AppointMent!
     addHealthMessage(title: String!, body: String!): HealthMessage!
     deleteHealthMessage(_id: String!): HealthMessage!
+    editEducation(message: String!, youtubeLink: String!): Education!
   }
 
   type Subscription {
@@ -86,6 +87,11 @@ const typeDefs = gql`
   type SignedUrl {
     key: String!
     url: String!
+  }
+  type Education {
+    youtubeLink: String!
+    message: String!
+    doctor: String!
   }
   input RegisterUserInput {
     fullName: String!

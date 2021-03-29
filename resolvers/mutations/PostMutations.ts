@@ -2,8 +2,9 @@ import { ForbiddenError } from "apollo-server-errors";
 import AWS from "aws-sdk";
 import { v1 as uuidV1 } from "uuid";
 import { Context } from "..";
-import { patientAuth } from "../../middlewares/auth";
+import { doctorAuth, patientAuth } from "../../middlewares/auth";
 import Comment from "../../models/Comment";
+import Education from "../../models/Education";
 import Post from "../../models/Post";
 
 export const PostMutations = {
@@ -74,5 +75,23 @@ export const PostMutations = {
       return comment;
     }
     throw new ForbiddenError("No comment with that id");
+  },
+  async editEducation(
+    prt: any,
+    args: { message: string; youtubeLink: string },
+    { req }: Context
+  ) {
+    const doctor = doctorAuth(req);
+    let education = await Education.findOne();
+    if (!education) {
+      education = Education.build({ ...args, doctor: doctor._id });
+      await education.save();
+    } else {
+      education.message = args.message;
+      education.youtubeLink = args.youtubeLink;
+      education.doctor = doctor._id;
+      await education.save();
+    }
+    return education;
   }
 };
