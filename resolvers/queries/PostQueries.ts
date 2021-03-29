@@ -34,20 +34,23 @@ export const PostQueries = {
   async getSignedUrl(prt: any, args: any, { req }: Context) {
     const patient = patientAuth(req);
     const key = `${patient._id}/${uuidV1()}.jpeg`;
-    return s3.getSignedUrl(
-      "putObject",
-      {
-        Bucket: "e-commerce-gig",
-        ContentType: "image/jpeg",
-        Key: key
-      },
-      (err, url) => {
-        if (err) {
-          console.log(err);
-          throw new ForbiddenError("error getting signed url" + err);
-        }
-        return { key, url };
-      }
-    );
+    try {
+      return new Promise((resolve, reject) => {
+        s3.getSignedUrl(
+          "putObject",
+          {
+            Bucket: "e-commerce-gig",
+            ContentType: "image/jpeg",
+            Key: key
+          },
+          (err, url) => {
+            if (err) reject(err);
+            resolve({ key, url });
+          }
+        );
+      });
+    } catch (error) {
+      throw new ForbiddenError("error getting signed url" + error);
+    }
   }
 };
