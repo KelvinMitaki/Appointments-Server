@@ -15,6 +15,6 @@ export const MessageQueries = {
   },
   fetchHealthMessages(prt: any, args: any, { req }: Context) {
     patientAuth(req, true);
-    return HealthMessage.find({ deleted: false }).limit(50);
+    return HealthMessage.find({ deleted: false }).limit(50).sort({ _id: -1 });
   }
 };
