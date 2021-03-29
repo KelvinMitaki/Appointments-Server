@@ -88,7 +88,7 @@ export const PostMutations = {
       await education.save();
     } else {
       education.message = args.message;
-      education.youtubeLink = args.youtubeLink;
+      education.youtubeLink = args.youtubeLink.trim();
       education.doctor = doctor._id;
       await education.save();
     }
