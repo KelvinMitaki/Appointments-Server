@@ -47,6 +47,7 @@ const typeDefs = gql`
     createdAt: String!
     updatedAt: String!
     comments: Int!
+    imageUrl: String
   }
   type Comment {
     _id: String!
