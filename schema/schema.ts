@@ -9,6 +9,7 @@ const typeDefs = gql`
     fetchAppointMents: [AppointMent!]!
     fetchHealthMessages: [HealthMessage!]!
     getSignedUrl: SignedUrl!
+    fetchEducation: Education!
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!

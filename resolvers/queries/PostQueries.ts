@@ -4,6 +4,7 @@ import { v1 as uuidV1 } from "uuid";
 import { Context } from "..";
 import { patientAuth } from "../../middlewares/auth";
 import Comment from "../../models/Comment";
+import Education from "../../models/Education";
 import Post from "../../models/Post";
 
 const s3 = new AWS.S3({
@@ -52,5 +53,9 @@ export const PostQueries = {
     } catch (error) {
       throw new ForbiddenError("error getting signed url" + error);
     }
+  },
+  fetchEducation(prt: any, args: any, { req }: Context) {
+    patientAuth(req, true);
+    return Education.findOne();
   }
 };
