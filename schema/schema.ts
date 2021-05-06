@@ -24,7 +24,7 @@ const typeDefs = gql`
     addHealthMessage(title: String!, body: String!): HealthMessage!
     deleteHealthMessage(_id: String!): HealthMessage!
     editEducation(message: String!, youtubeLink: String!): Education!
-    logoutUser: String!
+    logoutUser: Token
   }
 
   type Subscription {

@@ -54,6 +54,7 @@ export const UserMutations = {
   },
   logoutUser(prt: any, args: any, { res }: Context) {
     res.clearCookie("token");
-    return "ok";
+    res.clearCookie("client_token");
+    return null;
   }
 };
