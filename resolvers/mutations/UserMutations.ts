@@ -2,10 +2,7 @@ import { ForbiddenError } from "apollo-server-errors";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { Context } from "..";
-import {
-  registerValidation,
-  loginValidation
-} from "../../middlewares/validation";
+import { registerValidation, loginValidation } from "../../middlewares/validation";
 import User, { UserAttrs } from "../../models/User";
 
 export const UserMutations = {
@@ -20,9 +17,7 @@ export const UserMutations = {
       ]
     });
     if (userExists) {
-      throw new ForbiddenError(
-        "User with that name or civil ID already exists"
-      );
+      throw new ForbiddenError("User with that name or civil ID already exists");
     }
     args.values.fullName = args.values.fullName.toLowerCase();
     args.values.civilID = await bcrypt.hash(args.values.civilID, 10);
@@ -38,19 +33,15 @@ export const UserMutations = {
 
     return { token };
   },
-  async loginUser(
-    prt: any,
-    args: { fullName: string; civilID: string },
-    { res }: Context
-  ) {
+  async loginUser(prt: any, args: { fullName: string; civilID: string }, { res }: Context) {
     loginValidation(args);
     const user = await User.findOne({ fullName: args.fullName.toLowerCase() });
     if (!user) {
-      throw new ForbiddenError("Invalid email or password");
+      throw new ForbiddenError("Invalid name or civil ID");
     }
     const isMatch = await bcrypt.compare(args.civilID, user.civilID);
     if (!isMatch) {
-      throw new ForbiddenError("Invalid email or password");
+      throw new ForbiddenError("Invalid name or civil ID");
     }
     const token = jwt.sign(user.toObject(), process.env.JWT_SECRET!);
     res.cookie("token", token, {
