@@ -51,5 +51,9 @@ export const UserMutations = {
       secure: process.env.NODE_ENV !== "development"
     });
     return { token };
+  },
+  logoutUser(prt: any, args: any, { res }: Context) {
+    res.clearCookie("token");
+    return "ok";
   }
 };
