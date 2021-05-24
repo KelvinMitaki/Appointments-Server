@@ -34,7 +34,7 @@ server.applyMiddleware({
     credentials: true,
     origin:
       process.env.NODE_ENV === "production"
-        ? "https://appointments-seven.vercel.app"
+        ? "https://appointments-three.vercel.app"
         : "http://localhost:3000"
   }
 });
