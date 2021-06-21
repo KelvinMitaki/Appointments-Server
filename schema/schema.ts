@@ -12,7 +12,7 @@ const typeDefs = gql`
     fetchEducation: Education!
   }
   type Mutation {
-    registerUser(values: RegisterUserInput): Token!
+    registerUser(values: RegisterUserInput!): Token!
     loginUser(fullName: String!, civilID: ID!): Token!
     createPost(message: String!, imageUrl: String): Post!
     createComment(message: String!, post: String!): Comment!

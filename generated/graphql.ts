@@ -89,7 +89,7 @@ export type Mutation = {
 
 
 export type MutationRegisterUserArgs = {
-  values?: Maybe<RegisterUserInput>;
+  values: RegisterUserInput;
 };
 
 
@@ -407,7 +407,7 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  registerUser?: Resolver<ResolversTypes['Token'], ParentType, ContextType, RequireFields<MutationRegisterUserArgs, never>>;
+  registerUser?: Resolver<ResolversTypes['Token'], ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'values'>>;
   loginUser?: Resolver<ResolversTypes['Token'], ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'fullName' | 'civilID'>>;
   createPost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'message'>>;
   createComment?: Resolver<ResolversTypes['Comment'], ParentType, ContextType, RequireFields<MutationCreateCommentArgs, 'message' | 'post'>>;
