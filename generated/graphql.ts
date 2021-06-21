@@ -112,7 +112,7 @@ export type MutationCreateCommentArgs = {
 
 
 export type MutationLikePostArgs = {
-  postID: Scalars['String'];
+  postID: Scalars['ID'];
 };
 
 

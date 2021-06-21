@@ -16,7 +16,7 @@ const typeDefs = gql`
     loginUser(fullName: String!, civilID: ID!): Token!
     createPost(message: String!, imageUrl: String): Post!
     createComment(message: String!, post: String!): Comment!
-    likePost(postID: String!): Post!
+    likePost(postID: ID!): Post!
     likeComment(commentID: String!): Comment!
     addMessage(receiver: String!, message: String!): Message!
     readMessage(reader: String!, messageID: ID!): Message!
