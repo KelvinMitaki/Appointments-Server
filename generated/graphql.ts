@@ -210,7 +210,7 @@ export type Subscription = {
 
 
 export type SubscriptionAddMessageArgs = {
-  receiverID: Scalars['String'];
+  receiverID: Scalars['ID'];
   senderID: Scalars['ID'];
 };
 
