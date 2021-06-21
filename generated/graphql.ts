@@ -192,7 +192,7 @@ export type QueryFetchMessagesArgs = {
 
 export type RegisterUserInput = {
   fullName: Scalars['String'];
-  civilID: Scalars['String'];
+  civilID: Scalars['ID'];
   age: Scalars['Int'];
   isDoctor: Scalars['Boolean'];
 };
@@ -224,7 +224,7 @@ export type User = {
   __typename?: 'User';
   _id: Scalars['ID'];
   fullName: Scalars['String'];
-  civilID: Scalars['String'];
+  civilID: Scalars['ID'];
   age: Scalars['Int'];
   isDoctor: Scalars['Boolean'];
   createdAt: Scalars['String'];
@@ -468,7 +468,7 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   fullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  civilID?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  civilID?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   age?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   isDoctor?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

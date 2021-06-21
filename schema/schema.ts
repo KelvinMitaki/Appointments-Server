@@ -36,7 +36,7 @@ const typeDefs = gql`
   type User {
     _id: ID!
     fullName: String!
-    civilID: String!
+    civilID: ID!
     age: Int!
     isDoctor: Boolean!
     createdAt: String!
@@ -97,7 +97,7 @@ const typeDefs = gql`
   }
   input RegisterUserInput {
     fullName: String!
-    civilID: String!
+    civilID: ID!
     age: Int!
     isDoctor: Boolean!
   }
