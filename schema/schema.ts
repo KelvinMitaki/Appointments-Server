@@ -17,7 +17,7 @@ const typeDefs = gql`
     createPost(message: String!, imageUrl: String): Post!
     createComment(message: String!, post: String!): Comment!
     likePost(postID: ID!): Post!
-    likeComment(commentID: String!): Comment!
+    likeComment(commentID: ID!): Comment!
     addMessage(receiver: String!, message: String!): Message!
     readMessage(reader: String!, messageID: ID!): Message!
     addAppointMent(patient: String!, date: String!): AppointMent!
