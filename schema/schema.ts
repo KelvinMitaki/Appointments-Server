@@ -1,11 +1,11 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 const typeDefs = gql`
   type Query {
     fetchCurrentUser: User
     fetchPosts: [Post!]!
-    fetchComments(postID: String!): [Comment!]!
+    fetchComments(postID: ID!): [Comment!]!
     fetchUsers: [User!]!
-    fetchMessages(receiverID: String!): [Message!]!
+    fetchMessages(receiverID: ID!): [Message!]!
     fetchAppointMents: [AppointMent!]!
     fetchHealthMessages: [HealthMessage!]!
     getSignedUrl: SignedUrl!
@@ -13,37 +13,37 @@ const typeDefs = gql`
   }
   type Mutation {
     registerUser(values: RegisterUserInput): Token!
-    loginUser(fullName: String!, civilID: String!): Token!
+    loginUser(fullName: String!, civilID: ID!): Token!
     createPost(message: String!, imageUrl: String): Post!
     createComment(message: String!, post: String!): Comment!
     likePost(postID: String!): Post!
     likeComment(commentID: String!): Comment!
     addMessage(receiver: String!, message: String!): Message!
-    readMessage(reader: String!, messageID: String!): Message!
+    readMessage(reader: String!, messageID: ID!): Message!
     addAppointMent(patient: String!, date: String!): AppointMent!
     addHealthMessage(title: String!, body: String!): HealthMessage!
-    deleteHealthMessage(_id: String!): HealthMessage!
+    deleteHealthMessage(_id: ID!): HealthMessage!
     editEducation(message: String!, youtubeLink: String!): Education!
     logoutUser: Token
   }
 
   type Subscription {
-    addMessage(receiverID: String!, senderID: String!): Message!
+    addMessage(receiverID: String!, senderID: ID!): Message!
   }
   type Token {
     token: String!
   }
   type User {
+    _id: ID!
     fullName: String!
     civilID: String!
     age: Int!
     isDoctor: Boolean!
-    _id: String!
     createdAt: String!
     updatedAt: String!
   }
   type Post {
-    _id: String!
+    _id: ID!
     author: User!
     message: String!
     likes: [String!]!
@@ -53,7 +53,7 @@ const typeDefs = gql`
     imageUrl: String
   }
   type Comment {
-    _id: String!
+    _id: ID!
     author: User!
     post: String!
     message: String!
@@ -62,7 +62,7 @@ const typeDefs = gql`
     updatedAt: String!
   }
   type Message {
-    _id: String!
+    _id: ID!
     sender: String!
     receiver: String!
     message: String!
@@ -71,7 +71,7 @@ const typeDefs = gql`
     read: [String!]!
   }
   type AppointMent {
-    _id: String!
+    _id: ID!
     patient: User!
     doctor: String!
     date: String!
@@ -79,7 +79,7 @@ const typeDefs = gql`
     updatedAt: String!
   }
   type HealthMessage {
-    _id: String!
+    _id: ID!
     title: String!
     body: String!
     doctor: String!
